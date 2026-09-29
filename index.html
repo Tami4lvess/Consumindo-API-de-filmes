@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Avalie seu filme aqui</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <header>
+ <h1>CineTech</h1>
+ <div class="search-box">
+    <span>⌕</span>
+    <input type="search" placeholder="Pesquise um filme..." aria-label="Pesquisar filme">
+    <button type="button">Buscar</button>
+  </div>
+ <canvas id="particles"></canvas>   
+ <p class="search-message">Faça uma busca para ver os resultados.</p>
+ </header>
+ <main>
+ <!-- O JavaScript vai injetar o cartão do filme aqui dentro -->
+ <section id="movie-container">
+ </section>
+ </main>
+ <script src="script.js"></script>
+ <script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+  
+    let particles = [];
+    const mouse = { x: null, y: null };
+  
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+  
+    function createParticles() {
+      particles = [];
+  
+      const amount = Math.min(55, Math.floor(window.innerWidth / 18));
+  
+      for (let i = 0; i < amount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 4 + 2,
+          speedX: (Math.random() - 0.5) * 0.45,
+          speedY: (Math.random() - 0.5) * 0.45,
+          color: Math.random() > 0.5
+            ? "rgba(245, 138, 181, 0.42)"
+            : "rgba(255, 255, 255, 0.7)"
+        });
+      }
+    }
+  
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+      particles.forEach((particle) => {
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+  
+        if (particle.x < -10) particle.x = canvas.width + 10;
+        if (particle.x > canvas.width + 10) particle.x = -10;
+        if (particle.y < -10) particle.y = canvas.height + 10;
+        if (particle.y > canvas.height + 10) particle.y = -10;
+  
+        if (mouse.x !== null) {
+          const dx = mouse.x - particle.x;
+          const dy = mouse.y - particle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+  
+          if (distance < 130) {
+            particle.x -= dx * 0.018;
+            particle.y -= dy * 0.018;
+          }
+        }
+  
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+      });
+  
+      requestAnimationFrame(animateParticles);
+    }
+  
+    window.addEventListener("mousemove", (event) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    });
+  
+    window.addEventListener("mouseout", () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+  
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      createParticles();
+    });
+  
+    resizeCanvas();
+    createParticles();
+    animateParticles();
+  </script>
+</body>
+</html>

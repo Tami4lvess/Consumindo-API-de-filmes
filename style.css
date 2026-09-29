@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  padding: 50px;
+  font-size: 50px;
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fundo de bolinhas */
+#particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Barra de pesquisa */
+.search-box {
+  width: min(90%, 500px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px 7px 16px;
+  margin: 0 auto 22px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 2px solid #ffc0d9;
+  border-radius: 30px;
+  box-shadow: 0 7px 18px rgba(209, 94, 139, 0.15);
+  transition: 0.3s ease;
+}
+
+.search-box:focus-within {
+  border-color: #e85d93;
+  box-shadow: 0 8px 22px rgba(209, 94, 139, 0.28);
+  transform: translateY(-2px);
+}
+
+.search-box span {
+  color: #d85b8b;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #5c3a4a;
+  font-size: 15px;
+  padding: 9px 0;
+}
+
+.search-box input::placeholder {
+  color: #b88a9d;
+}
+
+.search-box button {
+  padding: 10px 17px;
+  font-size: 14px;
+}
+
+@media (max-width: 450px) {
+  .search-box {
+    gap: 7px;
+    padding-left: 12px;
+  }
+
+  .search-box button {
+    padding: 10px 13px;
+  }
+}
+/* Título centralizado */
+.movie-card h2 {
+  margin: 18px 0 10px;
+  text-align: center;
+  color: #d85b8b;
+  font-size: 28px;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* Texto de resultado centralizado */
+.search-message {
+  width: 100%;
+  margin: 12px 0 18px;
+  text-align: center;
+  color: #7d5665;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Botão Buscar mais bonito */
+.search-box button {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  border-radius: 22px;
+  padding: 11px 20px;
+  background: linear-gradient(135deg, #ff9fc4, #df4f8a);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 5px 13px rgba(220, 82, 139, 0.32);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.search-box button::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 45%;
+  height: 180%;
+  background: rgba(255, 255, 255, 0.34);
+  transform: rotate(25deg);
+  transition: left 0.45s ease;
+}
+
+.search-box button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(220, 82, 139, 0.42);
+}
+
+.search-box button:hover::before {
+  left: 120%;
+}
+
+.search-box button:active {
+  transform: scale(0.96);
+}
