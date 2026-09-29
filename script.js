@@ -8,11 +8,11 @@ const container = document.getElementById('movie-container');
 
 // =============================================
 btnBuscar.addEventListener('click', () => {
- const nomeFilme = inputFilme.value; // Lê o que o usuário digitou
- if (nomeFilme !== '') {
- container.innerHTML = '<p>Carregando...</p>';
- buscarFilme(nomeFilme);
- }
+    const nomeFilme = inputFilme.value; // Lê o que o usuário digitou
+    if (nomeFilme !== '') {
+    container.innerHTML = '<p>Carregando...</p>';
+    buscarFilme(nomeFilme);
+    }
 });
 // =============================================
 // FUNÇÃO PRINCIPAL: Buscar filme na API
